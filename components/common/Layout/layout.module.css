@@ -4,3 +4,7 @@
   display: grid;
   place-items: center;
 }
+
+.content {
+  width: 100%;
+}

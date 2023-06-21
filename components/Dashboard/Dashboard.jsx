@@ -28,9 +28,9 @@ const Dashboard = ({ posts }) => {
 
   console.log("posts", posts);
 
-  useEffect(() => {
-    if (!user || status === "unauthenticated") router.push("/");
-  }, [user, router, status]);
+  // useEffect(() => {
+  //   if (!user || status === "unauthenticated") router.push("/");
+  // }, [user, router, status]);
 
   if (status === "loading") {
     return (
@@ -51,7 +51,6 @@ const Dashboard = ({ posts }) => {
 
   return (
     <div className={styles.container}>
-      <Header />
       <div className={styles.content}>
         <div className={styles.features__container}>
           <Card
@@ -65,6 +64,7 @@ const Dashboard = ({ posts }) => {
                 cursor: "pointer",
               },
             }}
+            onClick={() => router.push("/book/appointment")}
           >
             <Box
               display={"flex"}
