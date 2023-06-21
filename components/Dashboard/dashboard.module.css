@@ -2,3 +2,16 @@
   width: 100%;
   min-height: 100vh;
 }
+
+.content {
+  padding: 50px 100px;
+}
+
+.features__container {
+  padding: 10px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  gap: 40px;
+}

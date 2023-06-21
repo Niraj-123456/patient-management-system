@@ -59,7 +59,13 @@ const Login = () => {
     !user && (
       <div className={styles.container}>
         <div className={styles.left__content}>
-          <Image src="/images/login_bg_image.jpg" alt="login-bg-image" fill />
+          <Image
+            src="/images/login_bg_image.jpg"
+            alt="login-bg-image"
+            fill
+            sizes={500 * 750}
+            style={{ objectFit: "contain", objectPosition: "center" }}
+          />
         </div>
         <div className={styles.right__content}>
           <h1 className={styles.heading}>Patient Management System</h1>
