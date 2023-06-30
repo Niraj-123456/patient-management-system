@@ -1,5 +1,5 @@
 import React from "react";
-import Appointment from "../../components/Appointment/Appointment";
+import Appointment from "../../components/BookAppointment/Appointment";
 
 const appointment = () => {
   return <Appointment />;

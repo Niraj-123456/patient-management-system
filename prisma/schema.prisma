@@ -49,14 +49,16 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String        @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?       @unique
     emailVerified DateTime?
     image         String?
     posts         Post[]
     accounts      Account[]
     sessions      Session[]
+    appointments  Appointment[]
+    profiles      Profile[]
 }
 
 model VerificationToken {
@@ -66,4 +68,23 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Appointment {
+    id              String @id @default(cuid())
+    userId          String @map("user_id")
+    hospital        String
+    department      String
+    appointmentDate String @map("appointment_date")
+    appointmentTime String @map("appointment_time")
+    user            User   @relation(fields: [userId], references: [id])
+}
+
+model Profile {
+    id       String  @id @default(cuid())
+    name     String
+    address  String
+    ageRange String  @map("age_range")
+    user     User?   @relation(fields: [userId], references: [id])
+    userId   String? @unique @map("user_id")
 }

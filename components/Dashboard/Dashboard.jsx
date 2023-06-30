@@ -26,28 +26,9 @@ const Dashboard = ({ posts }) => {
   const { data, status } = session;
   const user = data?.user;
 
-  console.log("posts", posts);
-
-  // useEffect(() => {
-  //   if (!user || status === "unauthenticated") router.push("/");
-  // }, [user, router, status]);
-
-  if (status === "loading") {
-    return (
-      <div className={styles.container}>
-        <div
-          style={{
-            width: "100%",
-            height: "100vh",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <CircularProgress size={30} thickness={4} />
-        </div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!user || status === "unauthenticated") router.push("/");
+  }, [user, router, status]);
 
   return (
     <div className={styles.container}>

@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 55px);
+}
+
+.content {
+  padding: 50px 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.content h1 {
+  font-size: 24px;
+}
+
+.create__edit__profile__btn {
+  text-align: end;
+  width: 100%;
+}
+
+.profile__wrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile {
+  text-align: center;
+}
+
+.profile h1 {
+  font-size: 24px;
+}
+
+.profile__detail {
+  margin-top: 5px;
+}
+
+.profile__detail span {
+  font-size: 14px;
+  color: #777;
+}
+
+.create__profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 15px;
+}

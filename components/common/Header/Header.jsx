@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import styles from "./header.module.css";
 import {
   Avatar,
@@ -10,7 +11,7 @@ import {
   MenuItem,
   styled,
 } from "@mui/material";
-import { Settings, Logout } from "@mui/icons-material";
+import { Settings, Logout, CalendarMonth } from "@mui/icons-material";
 import { useSession, signOut } from "next-auth/react";
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
@@ -18,6 +19,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
 }));
 
 const Header = () => {
+  const router = useRouter();
   const { data, status } = useSession();
   const user = data?.user;
 
@@ -87,11 +89,25 @@ const Header = () => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <StyledMenuItem onClick={handleClose}>
-          <Avatar /> Profile
+        <StyledMenuItem onClick={() => router.push(`/profile/${user?.id}`)}>
+          <ListItemIcon>
+            <Avatar />
+          </ListItemIcon>
+          Profile
         </StyledMenuItem>
         <StyledMenuItem onClick={handleClose}>
-          <Avatar /> My account
+          <ListItemIcon>
+            <Avatar />
+          </ListItemIcon>
+          My account
+        </StyledMenuItem>
+        <StyledMenuItem
+          onClick={() => router.push(`/appointments/${user?.id}`)}
+        >
+          <ListItemIcon>
+            <CalendarMonth sx={{ width: 20, height: 20, mr: 1 }} />
+          </ListItemIcon>
+          My appointments
         </StyledMenuItem>
         <Divider />
         <StyledMenuItem onClick={handleClose}>

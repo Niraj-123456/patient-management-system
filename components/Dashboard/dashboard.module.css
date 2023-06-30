@@ -1,6 +1,6 @@
 .container {
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 55px);
 }
 
 .content {
@@ -9,9 +9,19 @@
 
 .features__container {
   padding: 10px 20px;
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  align-items: center;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 40px;
+}
+
+@media screen and (max-width: 850px) {
+  .features__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .features__container {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
