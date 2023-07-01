@@ -8,7 +8,7 @@ const Appointments = ({ appointments }) => {
       <div className={styles.content}>
         <h1>UpComing Appointments</h1>
         <div className={styles.appointments__wrapper}>
-          {appointments?.length > 0 &&
+          {appointments?.length > 0 ? (
             appointments?.map((appointment) => (
               <div key={appointment?.id} className={styles.appointment}>
                 <div className={styles.appointment__date__time}>
@@ -30,7 +30,14 @@ const Appointments = ({ appointments }) => {
                   </Button>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div>
+              <p style={{ fontSize: 14, color: "#777" }}>
+                You don&apos;t have any upcoming appointments.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
