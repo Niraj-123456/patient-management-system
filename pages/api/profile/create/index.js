@@ -2,6 +2,10 @@ import prisma from "../../../../lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
 
+export const config = {
+  runtime: "edge",
+};
+
 export default async function handle(req, res) {
   const { name, address, ageRange } = req.body;
   const session = await getServerSession(req, res, authOptions);

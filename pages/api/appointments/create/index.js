@@ -2,6 +2,10 @@ import prisma from "../../../../lib/prisma";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]";
 
+export const config = {
+  runtime: "edge",
+};
+
 export default async function handle(req, res) {
   const { hospital, department, appointmentDate, appointmentTime } = req.body;
   const session = await getServerSession(req, res, authOptions);
@@ -17,6 +21,5 @@ export default async function handle(req, res) {
       user: { connect: { id: session?.user?.id } },
     },
   });
-
   return res.status(200).json(result);
 }

@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "./profile.module.css";
 import { Button } from "@mui/material";
 import { AddCircleOutline } from "@mui/icons-material";
+import { useSession } from "next-auth/react";
 
 const Profile = ({ profile }) => {
   const router = useRouter();
+  const session = useSession();
+  const { data, status } = session;
+  const { user } = data?.user;
+
+  console.log("session", session);
+
+  // useEffect(() => {
+  //   if (!user || status === "unauthenticated") router.push("/");
+  // }, [user, router, status]);
 
   return (
     <div className={styles.container}>

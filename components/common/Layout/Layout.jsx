@@ -2,12 +2,13 @@ import React from "react";
 import styles from "./layout.module.css";
 
 import { useSession } from "next-auth/react";
-
 import Header from "../Header/Header";
 import { CircularProgress } from "@mui/material";
 
 const Layout = ({ children }) => {
-  const { data: session, status } = useSession();
+  const session = useSession();
+  const { data, status } = session;
+  const user = data?.user;
 
   return (
     <div className={styles.container}>
@@ -15,7 +16,7 @@ const Layout = ({ children }) => {
         <CircularProgress size={35} thickness={4} />
       ) : (
         <React.Fragment>
-          {session && <Header />}
+          {user && <Header />}
           <div className={styles.content}>{children}</div>
         </React.Fragment>
       )}

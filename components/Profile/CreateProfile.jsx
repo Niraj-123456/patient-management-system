@@ -26,7 +26,7 @@ const CreateProfile = () => {
   const [submitting, setSubmitting] = useState(false);
   const router = useRouter();
   const session = useSession();
-  const { data } = session;
+  const { data, status } = session;
   const user = data?.user;
 
   const handleCreateProfile = (data) => {
@@ -49,77 +49,83 @@ const CreateProfile = () => {
       });
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h1>Create A Profile</h1>
-        <Formik
-          initialValues={{
-            name: "",
-            address: "",
-            ageRange: "",
-          }}
-          onSubmit={(values, { setSubmitting }) => {
-            handleCreateProfile(values);
-            setSubmitting(false);
-          }}
-        >
-          {({ values, errors, touched, dirty, isValid, isSubmitting }) => (
-            <Form className={styles.create__profile__form}>
-              <Field name="name">
-                {({ field }) => (
-                  <TextField {...field} label="Name" size="small" />
-                )}
-              </Field>
-              <Field name="address">
-                {({ field }) => (
-                  <TextField {...field} label="Address" size="small" />
-                )}
-              </Field>
-              <Field name="ageRange">
-                {({ field }) => (
-                  <TextField select {...field} label="Age Range" size="small">
-                    {ageRanges?.map((ageRange) => (
-                      <MenuItem key={ageRange?.value} value={ageRange?.value}>
-                        {ageRange?.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                )}
-              </Field>
+  useEffect(() => {
+    if (!user || status === "unauthenticated") router.push("/");
+  }, [user, router, status]);
 
-              <Box display={"flex"} gap={1}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  size={"small"}
-                  endIcon={
-                    submitting ? (
-                      <CircularProgress size={15} thickness={3} />
-                    ) : (
-                      ""
-                    )
-                  }
-                  disabled={isSubmitting || !dirty || !isValid || submitting}
-                >
-                  Create
-                </Button>
-                <Button
-                  variant="outlined"
-                  onClick={() => router(-1)}
-                  fullWidth
-                  size={"small"}
-                  disabled={isSubmitting || !dirty || !isValid || submitting}
-                >
-                  Cancel
-                </Button>
-              </Box>
-            </Form>
-          )}
-        </Formik>
+  return (
+    user && (
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h1>Create A Profile</h1>
+          <Formik
+            initialValues={{
+              name: "",
+              address: "",
+              ageRange: "",
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+              handleCreateProfile(values);
+              setSubmitting(false);
+            }}
+          >
+            {({ values, errors, touched, dirty, isValid, isSubmitting }) => (
+              <Form className={styles.create__profile__form}>
+                <Field name="name">
+                  {({ field }) => (
+                    <TextField {...field} label="Name" size="small" />
+                  )}
+                </Field>
+                <Field name="address">
+                  {({ field }) => (
+                    <TextField {...field} label="Address" size="small" />
+                  )}
+                </Field>
+                <Field name="ageRange">
+                  {({ field }) => (
+                    <TextField select {...field} label="Age Range" size="small">
+                      {ageRanges?.map((ageRange) => (
+                        <MenuItem key={ageRange?.value} value={ageRange?.value}>
+                          {ageRange?.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  )}
+                </Field>
+
+                <Box display={"flex"} gap={1}>
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    size={"small"}
+                    endIcon={
+                      submitting ? (
+                        <CircularProgress size={15} thickness={3} />
+                      ) : (
+                        ""
+                      )
+                    }
+                    disabled={isSubmitting || !dirty || !isValid || submitting}
+                  >
+                    Create
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    onClick={() => router(-1)}
+                    fullWidth
+                    size={"small"}
+                    disabled={isSubmitting || !dirty || !isValid || submitting}
+                  >
+                    Cancel
+                  </Button>
+                </Box>
+              </Form>
+            )}
+          </Formik>
+        </div>
       </div>
-    </div>
+    )
   );
 };
 
